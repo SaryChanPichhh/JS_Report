@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@source "../data/**/*.handlebars";
+@source "../data/**/*.html";
+@source "../data/**/*.js";
+
+@theme {
+  --color-primary: rgb(140 10 57);
+}

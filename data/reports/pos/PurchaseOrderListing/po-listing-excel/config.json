@@ -1,0 +1,20 @@
+{
+    "_id": "R2KVpO2jDnXXosMu",
+    "shortid": "po-listing-excel",
+    "$entitySet": "templates",
+    "name": "po-listing-excel",
+    "recipe": "html-to-xlsx",
+    "engine": "handlebars",
+    "data": {
+        "shortid": "poListData001"
+    },
+    "creationDate": {
+        "$$date": 1779759183082
+    },
+    "modificationDate": {
+        "$$date": 1779771054611
+    },
+    "htmlToXlsx": {
+        "htmlEngine": "chrome"
+    }
+}

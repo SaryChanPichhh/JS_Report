@@ -1,0 +1,26 @@
+{
+  "_id": "xYJ66j3ErnbmM5ei",
+  "shortid": "daily-closing-inventory-pdf",
+  "$entitySet": "templates",
+  "name": "daily-closing-inventory-pdf",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "data": {
+    "shortid": "poListData001"
+  },
+  "chrome": {
+    "format": "A4",
+    "printBackground": true,
+    "landscape": true,
+    "marginTop": "1cm",
+    "marginRight": "1cm",
+    "marginBottom": "1cm",
+    "marginLeft": "1cm"
+  },
+  "creationDate": {
+    "$$date": 1779759183082
+  },
+  "modificationDate": {
+    "$$date": 1779761984373
+  }
+}

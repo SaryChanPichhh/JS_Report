@@ -1,0 +1,13 @@
+{
+  "_id": "bNbEEMOcqvCB7PAn",
+  "shortid": "dPfvnI",
+  "$entitySet": "assets",
+  "isSharedHelper": true,
+  "name": "global-helpers.js",
+  "creationDate": {
+    "$$date": 1779759183094
+  },
+  "modificationDate": {
+    "$$date": 1779759183094
+  }
+}

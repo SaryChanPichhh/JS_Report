@@ -1,0 +1,9 @@
+{
+    "_id": "nDChdCk17qAmceHI",
+    "shortid": "DeC2ko",
+    "$entitySet": "data",
+    "name": "daily-closing-inventory-data",
+    "modificationDate": {
+        "$$date": 1779782886974
+    }
+}

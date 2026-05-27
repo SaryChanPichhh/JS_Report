@@ -1,0 +1,83 @@
+{
+  "template": {
+    "shortid": "daily-closing-inventory-80-pdf"
+  },
+  "data": {
+    "Seller": "Sokha",
+    "Dates": "2026-05-26",
+    "PrintDate": "2026-05-26T09:30:00",
+    "Duration": "08:00 AM - 09:00 PM",
+    "Subtotal": 125.75,
+    "Discount": 5.0,
+    "TotalPrice": "120.75",
+    "TotalRiel": 495075,
+    "TotalDollar": 120.75,
+    "Expense": 10.0,
+    "ExpenseRiel": 41000,
+    "ExchangeRate": 4100,
+    "Vat": 0,
+    "CashChange": 2.5,
+    "Items": [
+      {
+        "ItemCode": "ITEM001",
+        "ItemDesc": "Coconut Shower Gel 500ml",
+        "Qty": 2,
+        "Price": 5.0,
+        "DiscountPrice": 0.5,
+        "FinalPrice": 4.5,
+        "Total": 9.0,
+        "CategoryCode": "CAT001",
+        "CategoryDesc": "Shower Gel"
+      },
+      {
+        "ItemCode": "ITEM002",
+        "ItemDesc": "Vitamin C Serum 30ml",
+        "Qty": 3,
+        "Price": 8.0,
+        "DiscountPrice": 1.0,
+        "FinalPrice": 7.0,
+        "Total": 21.0,
+        "CategoryCode": "CAT002",
+        "CategoryDesc": "Skincare"
+      },
+      {
+        "ItemCode": "ITEM003",
+        "ItemDesc": "BB Cream SPF50",
+        "Qty": 5,
+        "Price": 4.5,
+        "DiscountPrice": 0,
+        "FinalPrice": 4.5,
+        "Total": 22.5,
+        "CategoryCode": "CAT003",
+        "CategoryDesc": "Makeup"
+      }
+    ],
+
+    "Payments": [
+      {
+        "PaymentType": "Cash USD",
+        "TotalRecieved": "80.75"
+      },
+      {
+        "PaymentType": "ABA",
+        "TotalRecieved": "40.00"
+      }
+    ],
+
+    "Expenses": [
+      {
+        "ExpenseDesc": "Delivery Fee",
+        "ExpenseBy": "Sokha",
+        "ExpenseAmount": "5.00"
+      },
+      {
+        "ExpenseDesc": "Staff Meal",
+        "ExpenseBy": "Dara",
+        "ExpenseAmount": "5.00"
+      }
+    ]
+  },
+  "options": {
+    "reportName": "daily-closing-inventory-80mm"
+  }
+}

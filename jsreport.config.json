@@ -1,0 +1,45 @@
+{
+  "httpPort": 5488,
+  "store": {
+    "provider": "fs"
+  },
+  "blobStorage": {
+    "provider": "fs"
+  },
+  "logger": {
+    "console": {
+      "transport": "console",
+      "level": "debug"
+    },
+    "file": {
+      "transport": "file",
+      "level": "info",
+      "filename": "logs/reporter.log"
+    },
+    "error": {
+      "transport": "file",
+      "level": "error",
+      "filename": "logs/error.log"
+    }
+  },
+  "trustUserCode": true,
+  "reportTimeout": 60000,
+  "workers": {
+    "numberOfWorkers": 2
+  },
+  "extensions": {
+    "authentication": {
+      "cookieSession": {
+        "secret": "change-this-secret-key-to-something-long"
+      },
+      "admin": {
+        "username": "BCSA",
+        "password": "Bc@dmin"
+      },
+      "enabled": true
+    },
+    "sample-template": {
+      "createSamples": true
+    }
+  }
+}

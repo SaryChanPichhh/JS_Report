@@ -1,0 +1,63 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      {{asset "data/reports/assets/report.css"}}
+    </style>
+  </head>
+
+  <body>
+    <div class="">
+      <div class="header w-full">
+        <p class="text-center p-0 mb-3 text-xl">Daily Closing Inventory Detail</p>
+        <div class="start-date flex items-center justify-between">
+          <span class="label text-[14px]">Start Date:</span>
+          <span class="value text-[14px]">{{formatDate PrintDate}}</span>
+        </div>
+        <div class="duration flex items-center justify-between">
+          <span class="label text-[14px]">Duration:</span>
+          <span class="value text-[14px]">{{Duration}}
+        </div>
+      </div>
+      <div class="detail">
+            <div class="groupby-seller ">
+                {{#each (groupBySeller Items)}}
+                    <div class="seller-name flex items-center justify-between leading-5">
+                        <span class="text-[14px]">Seller :</span>
+                        <span class="text-[14px]">{{Seller}}</span>
+                    </div>
+                    <table class="w-full table-fixed border-collapse text-[9px] mt-1 mb-3">
+                        <colgroup>
+                            <col style="width: 35%;" />
+                            <col style="width: 10%;" />
+                            <col style="width: 16%;" />
+                            <col style="width: 16%;" />
+                            <col style="width: 16%;" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="border-y text-sm py-0.5 text-left font-normal">
+                                    Name</th>
+                                <th
+                                    class="border-y text-sm py-0.5 text-center font-normal"
+                                >Qty</th>
+                                <th
+                                    class="border-y text-sm py-0.5 text-center font-normal"
+                                >Price</th>
+                                <th
+                                    class="border-y text-sm py-0.5 text-right font-normal"
+                                >Disc.</th>
+                                <th
+                                    class="border-y text-sm py-0.5 text-right font-normal"
+                                >Total</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+                {{/each}}
+            </div>
+      </div>
+    </div>
+  </body>
+</html>

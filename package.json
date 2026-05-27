@@ -1,0 +1,30 @@
+{
+  "name": "jsreport-server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "concurrently \"npm run watch:report-css\" \"npm run dev:jsreport\"",
+    "dev:jsreport": "nodemon --watch server.js --watch data --ext js,json,handlebars,css --exec \"node server.js\"",
+    "jsreport": "jsreport",
+    "build:report-css": "npx @tailwindcss/cli -i ./src/report-tailwind.css -o ./data/reports/assets/report.css --minify",
+    "watch:report-css": "npx @tailwindcss/cli -i ./src/report-tailwind.css -o ./data/reports/assets/report.css --watch"
+  },
+  "jsreport": {
+    "entryPoint": "server.js"
+  },
+  "dependencies": {
+    "jsreport": "^4.13.0"
+  },
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.14",
+    "tailwindcss": "^4.3.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

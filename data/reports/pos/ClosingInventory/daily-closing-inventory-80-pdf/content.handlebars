@@ -1,0 +1,167 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      {{asset "data/reports/assets/report.css"}}
+    </style>
+  </head>
+  <body>
+    <div class="">
+      <div class="header flex flex-col">
+        <span class="text-center text-2xl mb-5">Daily Closing Inventory</span>
+        <div class="flex flex-col">
+          <div class="seller-name flex items-center justify-between leading-5">
+            <span class="text-[14px]">Seller :</span>
+            <span class="text-[14px]">{{Seller}}</span>
+            <span class="text-[14px]">{{formatDate PrintDate}}</span>
+          </div>
+          <div class="start-date flex items-center justify-between leading-5">
+            <span class="text-[14px]">Start Date :</span>
+            <span class="text-[12px]">{{formatDate Dates}}</span>
+          </div>
+          <div class="duration flex items-center justify-between leading-5">
+            <span class="text-[14px]">Duration :</span>
+            <span class="text-[14px]">{{Duration}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="detail-header mt-1">
+        <table class="w-full table-fixed border-collapse text-[9px]">
+          <colgroup>
+            <col style="width: 35%;" />
+            <col style="width: 10%;" />
+            <col style="width: 16%;" />
+            <col style="width: 16%;" />
+            <col style="width: 16%;" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="border-y text-sm py-0.5 text-left font-normal">
+                Name</th>
+              <th
+                class="border-y text-sm py-0.5 text-center font-normal"
+              >Qty</th>
+              <th
+                class="border-y text-sm py-0.5 text-center font-normal"
+              >Price</th>
+              <th
+                class="border-y text-sm py-0.5 text-right font-normal"
+              >Disc.</th>
+              <th
+                class="border-y text-sm py-0.5 text-right font-normal"
+              >Total</th>
+            </tr>
+            <tbody>
+                {{#each (groupByCategoryCode Items)}}
+                  <tr class=" bg-primary ">
+                    <td colspan="3" class="  text-white text-[13px]  border-b p-1 font-normal">
+                      Code: {{categoryDesc}}
+                    </td>
+                    <td colspan="1" class="  text-white text-[13px]  border-b p-1 font-normal text-right">
+                      Total :
+                    </td>
+                    <td colspan="1" class="  text-white text-[13px]  border-b p-1 font-normal text-right">
+                      {{formatMoney subTotal "en-US" "USD"}}
+                    </td>
+                  </tr>
+                    {{#each items}}
+                <tr>
+                  <td class="text-[12px]  py-1 text-left">
+                    {{ItemDesc}}</td>
+                  <td class="text-[13px]  py-1 text-center">
+                    {{Qty}}</td>
+                  <td class="text-[13px] py-1 text-center">
+                    {{formatMoney Price "en-US" "USD"}}</td>
+                  <td class="text-[13px]  py-1 text-right">
+                    {{formatMoney DiscountPrice "en-US" "USD"}}</td>
+                  <td class="text-[13px]  py-1 text-right">
+                    {{formatMoney Total "en-US" "USD"}}</td>
+                </tr>
+                    {{/each}}
+              {{/each}}
+            </tbody>
+          </thead>
+
+        </table>
+        <div class="footer mt-1 mb-3 flex flex-col  border-t ">
+          <div class="total-disc flex items-center justify-between leading-5">
+            <span class="text-sm">Total Disc.</span>
+            <span class="text-sm">{{formatMoney Discount "en-US" "USD"}}</span>
+          </div>
+          <div class="sub-total flex items-center justify-between leading-5">
+            <span class="text-sm">Sub Total</span>
+            <span class="text-sm">{{formatMoney SubTotal "en-US" "USD"}}</span>
+          </div>
+          <div
+            class="discount-on-invoice flex items-center justify-between leading-5"
+          >
+            <span class="text-sm">Disc. on Invoice</span>
+            <span class="text-sm">{{formatMoney Discount "en-US" "USD"}}</span>
+          </div>
+          <div class="grand-total flex items-center justify-between leading-5">
+            <span class="text-sm">Grand Total</span>
+            <span class="text-sm">{{formatMoney
+                TotalDollar
+                "en-US"
+                "USD"
+              }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="total-received w-full my-1 ">
+        <span class="flex items-center justify-center text-lg border-y">Total
+          Received</span>
+
+        <div class="total-received-data py-0.5">
+          {{#each Payments}}
+            <span class="flex items-center justify-between leading-5">
+              <span class="text-sm">{{PaymentType}}</span>
+              <span class="text-sm">{{formatMoney
+                  TotalReceived
+                  "en-US"
+                  "USD"
+                }}</span>
+            </span>
+          {{/each}}
+        </div>
+
+      </div>
+      <div class="total-received w-full my-1 ">
+        <span class="flex items-center justify-center text-lg border-y">Total
+          Expenses</span>
+
+        <div class="total-received-data py-0.5">
+          {{#each Expenses}}
+            <span class="flex items-center justify-between leading-5">
+              <span class="text-sm">{{ExpenseDesc}}</span>
+              <span class="text-sm">{{formatMoney
+                  ExpenseAmount
+                  "en-US"
+                  "USD"
+                }}</span>
+            </span>
+          {{/each}}
+        </div>
+
+      </div>
+      <div class="others border-t">
+
+        <div class="change flex items-center justify-between leading-5">
+          <span class="text-sm">Change</span>
+          <span class="text-sm">{{formatMoney Change "en-US" "USD"}}</span>
+        </div>
+      
+        <div class="tax flex items-center justify-between leading-5">
+          <span class="text-sm">Tax</span>
+          <span class="text-sm">{{formatMoney Vat "en-US" "USD"}}</span>
+        </div>
+      </div>
+      <div class="summeries ">
+        
+      <div class="powered-by flex items-center justify-center mt-5">
+        <span class="text-xs">Powered by MB POS</span>
+      </div>
+    </div>
+  </body>
+</html>

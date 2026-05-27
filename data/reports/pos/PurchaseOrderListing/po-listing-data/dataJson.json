@@ -1,0 +1,61 @@
+{
+  "StartDate": "2026-05-01T00:00:00",
+  "EndDate": "2026-05-31T23:59:59",
+  "Orders": [
+    {
+      "ReceiveDate": "2026-05-26T00:00:00",
+      "Items": [
+        {
+          "Time": "08:30 AM",
+          "Warehouse": "MAIN",
+          "SupplierCode": "SUP001",
+          "SupplierName": "ABC Supplier Co., Ltd",
+          "SupplierNameKH": "ក្រុមហ៊ុនផ្គត់ផ្គង់ ABC",
+          "TransRef": "PO26050001",
+          "ItemCode": "ITEM001",
+          "ItemDesc": "Coconut Shower Gel 500ml",
+          "ItemDescKH": "សាប៊ូដុសខ្លួនក្លិនដូង 500ml",
+          "Qty": 20,
+          "Cost": 2.5,
+          "TotalCost": 50.0,
+          "ExchangeRate": 4100
+        },
+        {
+          "Time": "09:15 AM",
+          "Warehouse": "MAIN",
+          "SupplierCode": "SUP001",
+          "SupplierName": "ABC Supplier Co., Ltd",
+          "SupplierNameKH": "ក្រុមហ៊ុនផ្គត់ផ្គង់ ABC",
+          "TransRef": "PO26050002",
+          "ItemCode": "ITEM002",
+          "ItemDesc": "Vitamin C Serum 30ml",
+          "ItemDescKH": "សេរ៉ូមវីតាមីន C 30ml",
+          "Qty": 10,
+          "Cost": 4.75,
+          "TotalCost": 47.5,
+          "ExchangeRate": 4100
+        }
+      ]
+    },
+    {
+      "ReceiveDate": "2026-05-27T00:00:00",
+      "Items": [
+        {
+          "Time": "10:00 AM",
+          "Warehouse": "BRANCH-001",
+          "SupplierCode": "SUP002",
+          "SupplierName": "Beauty Supply Cambodia",
+          "SupplierNameKH": "ប៊ីយូធី សាប់ផ្លាយ កម្ពុជា",
+          "TransRef": "PO26050003",
+          "ItemCode": "ITEM003",
+          "ItemDesc": "BB Cream SPF50",
+          "ItemDescKH": "ប៊ីប៊ីគ្រីម SPF50",
+          "Qty": 15,
+          "Cost": 3.25,
+          "TotalCost": 48.75,
+          "ExchangeRate": 4100
+        }
+      ]
+    }
+  ]
+}
