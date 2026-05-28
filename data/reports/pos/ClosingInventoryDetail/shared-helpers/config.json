@@ -1,0 +1,7 @@
+{
+  "_id": "cidHelpersAsset1",
+  "shortid": "cid-helpers",
+  "$entitySet": "assets",
+  "isSharedHelper": false,
+  "name": "closing-inventory-detail-helpers.js"
+}

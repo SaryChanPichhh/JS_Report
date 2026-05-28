@@ -27,6 +27,9 @@
   "workers": {
     "numberOfWorkers": 2
   },
+  "templatingEngines": {
+    "strategy": "in-process"
+  },
   "extensions": {
     "authentication": {
       "cookieSession": {

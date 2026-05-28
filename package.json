@@ -7,7 +7,8 @@
     "dev:jsreport": "nodemon --watch server.js --watch data --ext js,json,handlebars,css --exec \"node server.js\"",
     "jsreport": "jsreport",
     "build:report-css": "npx @tailwindcss/cli -i ./src/report-tailwind.css -o ./data/reports/assets/report.css --minify",
-    "watch:report-css": "npx @tailwindcss/cli -i ./src/report-tailwind.css -o ./data/reports/assets/report.css --watch"
+    "watch:report-css": "npx @tailwindcss/cli -i ./src/report-tailwind.css -o ./data/reports/assets/report.css --watch",
+    "debug:jsreport": "nodemon --inspect --watch server.js --watch data --ext js,json,handlebars,css --exec \"node server.js\""
   },
   "jsreport": {
     "entryPoint": "server.js"

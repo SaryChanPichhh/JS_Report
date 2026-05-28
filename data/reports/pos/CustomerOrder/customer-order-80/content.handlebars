@@ -1,0 +1,88 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      {{asset "data/reports/assets/report.css"}}
+    </style>
+  </head>
+  <body class="p-1 text-xs bg-white">
+
+    <!-- REPORT HEADER -->
+    <div class="text-center mb-1">
+      <div class="text-sm font-bold">Customer Order Report</div>
+      <div class="text-xs">{{formatDate Dates}}</div>
+      <div class="text-xs flex items-center mt-2">
+        <span>Customer : </span>
+        <span>{{CustomerName}}</span>
+
+      </div>
+    </div>
+
+    {{#each (groupByDateThenTransRef Items)}}
+      <!-- DATE GROUP HEADER -->
+      <div class="date-header text-xs px-1 py-1 mt-1 text-white bg-primary">
+        Invoice Date:
+        {{InvoiceDate}}
+      </div>
+
+      {{#each TransRefGroups}}
+        <!-- GROUP HEADER -->
+        <div class="flex justify-between text-xs font-medium py-1">
+          <div>
+            <span class="">Ref No:</span>
+            <span>[{{TransRef}}]</span>
+          </div>
+        </div>
+
+        <!-- DETAIL TABLE -->
+        <div class="">
+          <table class="w-full table-fixed border-collapse text-xs">
+            <colgroup>
+              <col style="width: 46%;" />
+              <col style="width: 8%;" />
+              <col style="width: 16%;" />
+              <col style="width: 14%;" />
+              <col style="width: 18%;" />
+            </colgroup>
+            <thead>
+              <tr class="border-y">
+                <th class="p-1 text-left">Description</th>
+                <th class="p-1 text-center">Qty</th>
+                <th class="p-1 text-right">Price</th>
+                <th class="p-1 text-right">Disc.</th>
+                <th class="p-1 text-right">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each Items}}
+                <tr>
+                  <td class="px-0.5 py-0.5">{{ItemDesc}}</td>
+                  <td class="px-0.5 py-0.5 text-center">{{Qty}}</td>
+                  <td class="px-0.5 py-0.5 text-right">${{FinalPrice}}</td>
+                  <td class="px-0.5 py-0.5 text-right">${{DiscountPrice}}</td>
+                  <td class="px-0.5 py-0.5 text-right">${{Total}}</td>
+                </tr>
+              {{/each}}
+              <tr class="border-t border-dashed">
+                <td colspan="3" class="py-1 text-right">Total:</td>
+                <td class="py-1 text-right">${{sumTotal
+                    Items
+                    "DiscountPrice"
+                  }}</td>
+                <td class="py-1 text-right">${{sumTotal Items "Total"}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      {{/each}}
+    {{/each}}
+
+    <!-- REPORT FOOTER -->
+    <div class="text-center mt-2 pt-2 text-xs">
+      Powered by MB POS
+    </div>
+
+  </body>
+</html>
