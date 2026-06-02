@@ -1,0 +1,18 @@
+{
+  "_id": "saleinvoicea5pdf",
+  "shortid": "saleinvoice-A5-pdf",
+  "$entitySet": "templates",
+  "name": "saleinvoice-A5-pdf",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "data": {},
+  "chrome": {
+    "printBackground": true,
+    "format": "A5",
+    "landscape": false,
+    "marginTop": "2mm",
+    "marginRight": "2mm",
+    "marginBottom": "2mm",
+    "marginLeft": "2mm"
+  }
+}

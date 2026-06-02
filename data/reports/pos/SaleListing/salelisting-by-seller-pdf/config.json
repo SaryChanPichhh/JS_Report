@@ -1,0 +1,18 @@
+{
+  "_id": "salelstbysellrpdf",
+  "shortid": "salelisting-by-seller-pdf",
+  "$entitySet": "templates",
+  "name": "salelisting-by-seller-pdf",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "data": {},
+  "chrome": {
+    "printBackground": true,
+    "format": "A4",
+    "landscape": false,
+    "marginTop": "1mm",
+    "marginRight": "1mm",
+    "marginBottom": "1mm",
+    "marginLeft": "1mm"
+  }
+}

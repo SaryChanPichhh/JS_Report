@@ -1,0 +1,17 @@
+{
+  "_id": "saleinvoice80pdf",
+  "shortid": "saleinvoice-80-pdf",
+  "$entitySet": "templates",
+  "name": "saleinvoice-80-pdf",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "data": {},
+  "chrome": {
+    "printBackground": true,
+    "width": "80mm",
+    "marginTop": "1mm",
+    "marginRight": "1mm",
+    "marginBottom": "1mm",
+    "marginLeft": "1mm"
+  }
+}

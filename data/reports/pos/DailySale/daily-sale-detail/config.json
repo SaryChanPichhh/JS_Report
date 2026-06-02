@@ -1,0 +1,24 @@
+{
+  "_id": "8xHawqz2r9ZZirvi",
+  "shortid": "daily-sale-detail",
+  "$entitySet": "templates",
+  "name": "daily-sale-detail",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "data": {},
+  "chrome": {
+    "printBackground": true,
+    "format": "A4",
+    "landscape": false,
+    "marginTop": "1mm",
+    "marginRight": "1mm",
+    "marginBottom": "1mm",
+    "marginLeft": "1mm"
+  },
+  "creationDate": {
+    "$$date": 1779759183082
+  },
+  "modificationDate": {
+    "$$date": 1779761984373
+  }
+}

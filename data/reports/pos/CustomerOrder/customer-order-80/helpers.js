@@ -14,8 +14,8 @@ function sumTotal(items, field) {
 }
 
 try {
-  var Handlebars = require('handlebars');
-  Handlebars.registerHelper('sumTotal', sumTotal);
+  var Handlebars = require("handlebars");
+  Handlebars.registerHelper("sumTotal", sumTotal);
 } catch (e) {
   // silent catch
 }
@@ -28,12 +28,16 @@ function groupByInvoiceDate(items) {
   var grouped = {};
   items.forEach(function (item) {
     if (item) {
-      var date = item.InvoicDate || item.InvoiceDate || item.invoiceDate || "Unknown Date";
+      var date =
+        item.InvoicDate ||
+        item.InvoiceDate ||
+        item.invoiceDate ||
+        "Unknown Date";
       if (!grouped[date]) {
         grouped[date] = {
           InvoiceDate: date,
           Items: [],
-          TransRef: item.TransRef || ""
+          TransRef: item.TransRef || "",
         };
       }
       grouped[date].Items.push(item);
@@ -46,8 +50,8 @@ function groupByInvoiceDate(items) {
 }
 
 try {
-  var Handlebars = require('handlebars');
-  Handlebars.registerHelper('groupByInvoiceDate', groupByInvoiceDate);
+  var Handlebars = require("handlebars");
+  Handlebars.registerHelper("groupByInvoiceDate", groupByInvoiceDate);
 } catch (e) {
   // silent catch
 }
@@ -60,7 +64,11 @@ function groupByTransRef(items) {
   var grouped = {};
   items.forEach(function (item) {
     if (item) {
-      var date = item.InvoicDate || item.InvoiceDate || item.invoiceDate || "Unknown Date";
+      var date =
+        item.InvoicDate ||
+        item.InvoiceDate ||
+        item.invoiceDate ||
+        "Unknown Date";
       var ref = item.TransRef || item.transRef || "Unknown Ref";
       var key = date + "_" + ref;
 
@@ -68,7 +76,7 @@ function groupByTransRef(items) {
         grouped[key] = {
           TransRef: ref,
           InvoiceDate: date,
-          Items: []
+          Items: [],
         };
       }
       grouped[key].Items.push(item);
@@ -81,8 +89,8 @@ function groupByTransRef(items) {
 }
 
 try {
-  var Handlebars = require('handlebars');
-  Handlebars.registerHelper('groupByTransRef', groupByTransRef);
+  var Handlebars = require("handlebars");
+  Handlebars.registerHelper("groupByTransRef", groupByTransRef);
 } catch (e) {
   // silent catch
 }
@@ -95,20 +103,24 @@ function groupByDateThenTransRef(items) {
   var dateMap = {};
   items.forEach(function (item) {
     if (item) {
-      var date = item.InvoicDate || item.InvoiceDate || item.invoiceDate || "Unknown Date";
+      var date =
+        item.InvoicDate ||
+        item.InvoiceDate ||
+        item.invoiceDate ||
+        "Unknown Date";
       var ref = item.TransRef || item.transRef || "Unknown Ref";
 
       if (!dateMap[date]) {
         dateMap[date] = {
           InvoiceDate: date,
-          transRefMap: {}
+          transRefMap: {},
         };
       }
 
       if (!dateMap[date].transRefMap[ref]) {
         dateMap[date].transRefMap[ref] = {
           TransRef: ref,
-          Items: []
+          Items: [],
         };
       }
 
@@ -123,17 +135,14 @@ function groupByDateThenTransRef(items) {
     });
     return {
       InvoiceDate: dateGroup.InvoiceDate,
-      TransRefGroups: transRefGroups
+      TransRefGroups: transRefGroups,
     };
   });
 }
 
 try {
-  var Handlebars = require('handlebars');
-  Handlebars.registerHelper('groupByDateThenTransRef', groupByDateThenTransRef);
+  var Handlebars = require("handlebars");
+  Handlebars.registerHelper("groupByDateThenTransRef", groupByDateThenTransRef);
 } catch (e) {
   // silent catch
 }
-
-
-
