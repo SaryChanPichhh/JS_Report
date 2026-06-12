@@ -8,8 +8,8 @@
     />
     <style>
       {{asset "data/reports/assets/report.css"}}body {
-                                                  font-family: 'Inter', sans-serif;
-                                                }
+                                                                    font-family: 'Inter', sans-serif;
+                                                                  }
     </style>
   </head>
   <body class="bg-white p-2">
@@ -128,17 +128,6 @@
               <span class="font-semibold text-gray-700">{{SubTotal}}</span>
             </div>
 
-            {{#if DeliveryFee}}
-              <div
-                class="flex justify-between py-0.5 border-b border-dashed border-gray-200"
-              >
-                <span class="text-gray-500 font-medium">Delivery Fee:</span>
-                <span class="font-semibold text-gray-700">${{formatNumber
-                    DeliveryFee
-                  }}</span>
-              </div>
-            {{/if}}
-
             {{#if DiscountInvoice}}
               <div
                 class="flex justify-between py-0.5 border-b border-dashed border-gray-200"
@@ -146,7 +135,7 @@
                 <span class="text-gray-500 font-medium">Invoice Discount:</span>
                 <span
                   class="font-semibold text-red-600"
-                >-{{DiscountInvoice}}</span>
+                >{{DiscountInvoice}}</span>
               </div>
             {{/if}}
 

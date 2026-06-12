@@ -1,0 +1,263 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Closing Inventory Category Report</title>
+    <style>
+      {{asset "data/reports/assets/report.css"}}
+    </style>
+  </head>
+  <body class="bg-white text-slate-900 p-0 font-sans">
+    <div class="w-[74mm] mx-auto">
+
+      <!-- Header Section -->
+      <div class="flex flex-col border-gray-300 pb-2">
+        <h1
+          class="text-center text-sm font-bold text-slate-900 uppercase tracking-wider"
+        >Daily Closing Inventory</h1>
+        <p class="text-center text-[10px] text-gray-500 leading-tight">Valuation
+          and Sales Summary by Category</p>
+
+        <div class="flex flex-col mt-2 gap-1 text-[11px] text-gray-700">
+          <div class="flex justify-between items-center leading-tight">
+            <span class="font-semibold text-slate-900">Seller:</span>
+            <span>{{seller}}</span>
+          </div>
+          <div class="flex justify-between items-center leading-tight">
+            <span class="font-semibold text-slate-900">Duration:</span>
+            <span>{{duration}}</span>
+          </div>
+          <div class="flex justify-between items-center leading-tight">
+            <span class="font-semibold text-slate-900">Closing Date:</span>
+            <span>{{formatDate dates}}</span>
+          </div>
+          <div class="flex justify-between items-center leading-tight">
+            <span class="font-semibold text-slate-900">Print Date:</span>
+            <span>{{formatDateTime printDate}}</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Category-Grouped Details Table -->
+      <table class="w-full border-collapse table-fixed text-[10px]">
+        <colgroup>
+          <col style="width: 35%;" />
+          <!-- Description -->
+          <col style="width: 10%;" />
+          <!-- Qty -->
+          <col style="width: 17%;" />
+          <!-- Unit Price -->
+          <col style="width: 18%;" />
+          <!-- Discount -->
+          <col style="width: 20%;" />
+          <!-- Line Total -->
+        </colgroup>
+        <thead>
+          <tr class="border-y border-gray-300">
+            <th
+              class="text-left font-bold uppercase text-[9px] text-gray-600 py-1"
+            >Name</th>
+            <th
+              class="text-center font-bold uppercase text-[9px] text-gray-600 py-1"
+            >Qty</th>
+            <th
+              class="text-center font-bold uppercase text-[9px] text-gray-600 py-1"
+            >Price</th>
+            <th
+              class="text-right font-bold uppercase text-[9px] text-gray-600 py-1"
+            >Disc</th>
+            <th
+              class="text-right font-bold uppercase text-[9px] text-gray-600 py-1"
+            >Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each (groupByCategoryCode items exchangeRate)}}
+            <!-- Category Header Row -->
+            <tr class="bg-primary text-white border-b border-primary">
+              <td
+                colspan="1"
+                class="p-1 font-bold text-[9px] uppercase tracking-wider text-left leading-tight"
+              >
+                {{categoryDesc}}
+              </td>
+              <td
+                class="p-1 text-center font-bold text-[9px]"
+              >{{subTotalQty}}</td>
+
+              <td
+                colspan="3"
+                class="p-1 text-right font-bold text-[9px]"
+              >{{formatUSD subTotalUSD}}</td>
+            </tr>
+
+            <!-- Category Items Row -->
+            {{#each items}}
+              <tr class="border-b border-gray-100 py-1 even:bg-gray-50">
+                <td
+                  class="text-left py-1 pr-1 text-[10px] font-medium leading-tight text-slate-900"
+                >
+                  {{itemDesc}}
+                  <span
+                    class="text-[8px] text-gray-400 font-mono block"
+                  >{{itemCode}}</span>
+                </td>
+                <td
+                  class="text-center py-1 text-[10px] text-slate-900"
+                >{{qty}}</td>
+                <td
+                  class="text-center py-1 text-[10px] text-slate-900"
+                >{{formatUSD price}}</td>
+                <td class="text-right py-1 text-[10px] text-red-600">{{formatUSD
+                    discountPrice
+                  }}</td>
+                <td
+                  class="text-right py-1 text-[10px] font-semibold text-slate-900"
+                >{{formatUSD total}}</td>
+              </tr>
+            {{/each}}
+          {{/each}}
+
+          <!-- Grand Total Row -->
+          <tr
+            class="bg-gray-100 border-t border-b border-primary font-bold text-[11px]"
+          >
+            <td class="py-1 text-left uppercase text-slate-900">GRAND TOTAL</td>
+            <td class="py-1 text-center text-slate-900">{{totalQty items}}</td>
+            <td colspan="2" class="py-1 text-right"></td>
+            <td class="py-1 text-right text-primary">{{formatUSD
+                (totalItemCostUSD items)
+              }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Vertical Breakdown Sections -->
+
+      <!-- Payments Section -->
+      <div class="flex flex-col mt-4">
+        <span
+          class="text-center py-0.5 border-y border-gray-300 font-bold text-[10px] text-primary uppercase tracking-wider mb-1"
+        >Payment Methods</span>
+        <div class="flex flex-col">
+          {{#each payments}}
+            <div
+              class="flex justify-between items-center py-0.5 text-[11px] border-b border-gray-100 last:border-0"
+            >
+              <span class="text-slate-900 font-medium">{{paymentType}}</span>
+              <span class="font-bold text-slate-900">{{formatUSD
+                  totalRecieved
+                }}</span>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- Expenses Section -->
+      <div class="flex flex-col mt-3">
+        <span
+          class="text-center py-0.5 border-y border-gray-300 font-bold text-[10px] text-primary uppercase tracking-wider mb-1"
+        >Expenses Listing</span>
+        <div class="flex flex-col">
+          {{#each expenses}}
+            <div
+              class="flex justify-between items-start py-0.5 text-[11px] border-b border-gray-100 last:border-0"
+            >
+              <div class="flex flex-col">
+                <span
+                  class="text-slate-900 font-medium leading-tight"
+                >{{expenseDesc}}</span>
+                <span class="text-[8px] text-gray-400 font-normal">by
+                  {{expenseBy}}</span>
+              </div>
+              <span class="font-bold text-red-600">{{formatUSD
+                  expenseAmount
+                }}</span>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- Financial Summary Section -->
+      <div
+        class="flex flex-col mt-3 bg-gray-50 border border-gray-200 rounded p-2"
+      >
+        <span
+          class="text-center pb-1 border-b border-gray-300 font-bold text-[10px] text-primary uppercase tracking-wider mb-1"
+        >Financial Summary</span>
+        <div class="flex flex-col gap-0.5 text-[11px]">
+          <div class="flex justify-between items-center py-0.5">
+            <span class="text-gray-600">Subtotal (Gross)</span>
+            <span class="font-medium text-slate-900">{{formatUSD
+                subtotal
+              }}</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5 text-red-600">
+            <span>Invoice Discounts</span>
+            <span>-{{formatUSD discount}}</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5">
+            <span class="text-gray-600">VAT / Tax</span>
+            <span class="font-medium text-slate-900">{{formatUSD vat}}</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5 text-red-600">
+            <span>Expenses Deducted</span>
+            <span>-{{formatUSD expense}}</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5">
+            <span class="text-gray-600">Cash Change Given</span>
+            <span class="font-medium text-slate-900">{{formatUSD
+                cashChange
+              }}</span>
+          </div>
+          <div class="border-t border-gray-300 my-1"></div>
+          <div
+            class="flex justify-between items-center py-0.5 text-xs font-bold text-primary"
+          >
+            <span>Grand Total (Net)</span>
+            <span>{{formatUSD totalDollar}}</span>
+          </div>
+          <div
+            class="flex justify-between items-center text-[10px] font-bold text-gray-500"
+          >
+            <span>In Khmer Riel</span>
+            <span>{{formatKHR totalRiel}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signatures Section -->
+      <div class="grid grid-cols-3 gap-2 mt-5 text-center text-[8px]">
+        <div class="flex flex-col items-center">
+          <span class="font-semibold text-gray-700">Prepared By</span>
+          <div
+            class="w-16 border-b border-dashed border-gray-400 mt-4 mb-0.5"
+          ></div>
+          <span class="text-gray-400">(Signature & Date)</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="font-semibold text-gray-700">Verified By</span>
+          <div
+            class="w-16 border-b border-dashed border-gray-400 mt-4 mb-0.5"
+          ></div>
+          <span class="text-gray-400">(Signature & Date)</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="font-semibold text-gray-700">Approved By</span>
+          <div
+            class="w-16 border-b border-dashed border-gray-400 mt-4 mb-0.5"
+          ></div>
+          <span class="text-gray-400">(Signature & Date)</span>
+        </div>
+      </div>
+
+      <!-- Powered By Footer -->
+      <div
+        class="text-center mt-5 pt-1.5 border-t border-gray-200 text-[10px] text-gray-400"
+      >
+        Powered by MB POS • Daily Closing Category 80mm Report
+      </div>
+    </div>
+  </body>
+</html>

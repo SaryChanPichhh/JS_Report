@@ -1,8 +1,8 @@
 {
-  "_id": "xYJ66j3ErnbmM5ei",
-  "shortid": "daily-closing-inventory-pdf",
+  "_id": "MqbhhulxzSJOdPiB",
+  "shortid": "daily-closing-inventory-by-category-pdf",
   "$entitySet": "templates",
-  "name": "daily-closing-inventory-pdf",
+  "name": "daily-closing-inventory-by-category-pdf",
   "recipe": "chrome-pdf",
   "engine": "handlebars",
   "data": {
@@ -16,11 +16,5 @@
     "marginRight": "2mm",
     "marginBottom": "2mm",
     "marginLeft": "2mm"
-  },
-  "creationDate": {
-    "$$date": 1779759183082
-  },
-  "modificationDate": {
-    "$$date": 1779761984373
   }
 }

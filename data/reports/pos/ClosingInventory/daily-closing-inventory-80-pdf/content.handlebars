@@ -12,17 +12,17 @@
         <span class="text-center text-2xl mb-5">Daily Closing Inventory</span>
         <div class="flex flex-col">
           <div class="seller-name flex items-center justify-between leading-5">
-            <span class="text-[14px]">Seller :</span>
-            <span class="text-[14px]">{{Seller}}</span>
-            <span class="text-[14px]">{{formatDate PrintDate}}</span>
+            <span class="text-sm">Seller :</span>
+            <span class="text-sm">{{Seller}}</span>
+            <span class="text-sm">{{formatDate PrintDate}}</span>
           </div>
           <div class="start-date flex items-center justify-between leading-5">
-            <span class="text-[14px]">Start Date :</span>
-            <span class="text-[12px]">{{formatDate Dates}}</span>
+            <span class="text-sm">Start Date :</span>
+            <span class="text-sm">{{formatDate Dates}}</span>
           </div>
           <div class="duration flex items-center justify-between leading-5">
-            <span class="text-[14px]">Duration :</span>
-            <span class="text-[14px]">{{Duration}}</span>
+            <span class="text-sm">Duration :</span>
+            <span class="text-sm">{{Duration}}</span>
           </div>
         </div>
       </div>
@@ -109,8 +109,8 @@
           </div>
         </div>
       </div>
-      <div class="total-received w-full my-1 ">
-        <span class="flex items-center justify-center text-lg border-y">Total
+      <div class="total-received w-full mt-3 ">
+        <span class="flex items-center justify-center text-lg border-y">
           Received</span>
 
         <div class="total-received-data py-0.5">
@@ -127,8 +127,8 @@
         </div>
 
       </div>
-      <div class="total-received w-full my-1 ">
-        <span class="flex items-center justify-center text-lg border-y">Total
+      <div class="total-expenses w-full mt-3 ">
+        <span class="flex items-center justify-center text-lg border-y">
           Expenses</span>
 
         <div class="total-received-data py-0.5">
@@ -145,16 +145,16 @@
         </div>
 
       </div>
-      <div class="others border-t">
+      <div class="others border-t mt-3">
 
         <div class="change flex items-center justify-between leading-5">
-          <span class="text-sm">Change</span>
-          <span class="text-sm">{{formatMoney Change "en-US" "USD"}}</span>
+          <span class="text-sm">Cash Change</span>
+          <span class="text-sm">{{formatMoney CashChange "en-US" "USD"}}</span>
         </div>
       
         <div class="tax flex items-center justify-between leading-5">
           <span class="text-sm">Tax</span>
-          <span class="text-sm">{{formatMoney Vat "en-US" "USD"}}</span>
+          <span class="text-sm">{{ formatMoney Vat "en-US" "USD"}}</span>
         </div>
       </div>
       <div class="summeries ">

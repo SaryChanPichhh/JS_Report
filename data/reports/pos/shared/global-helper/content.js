@@ -15,12 +15,26 @@ function formatDate(value) {
 }
 
 function formatMoney(value, locale, currency) {
-  const num = Number(value || 0);
+  console.log(value,typeof value);
 
+  if(value === null || value === undefined) {
+    return "0";
+  }
+  if(typeof value === 'string' ){
+    return value;
+  }
+  const num = Number(value || 0);
   return num.toLocaleString(locale, {
     style: "currency",
     currency: currency,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
+}
+
+function isNullOrEmpty(value) {
+  if (value === null || value === undefined) {
+    return "";
+  }
+  return value;
 }
