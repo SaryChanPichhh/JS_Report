@@ -1,0 +1,24 @@
+{
+  "_id": "k2BRrPolGeQCL3aD",
+  "shortid": "sale-movement",
+  "$entitySet": "templates",
+  "name": "sale-movement",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "data": {},
+  "chrome": {
+    "printBackground": true,
+    "format": "A4",
+    "landscape": true,
+    "marginTop": "1mm",
+    "marginRight": "1mm",
+    "marginBottom": "1mm",
+    "marginLeft": "1mm"
+  },
+  "creationDate": {
+    "$$date": 1779759183082
+  },
+  "modificationDate": {
+    "$$date": 1779761984373
+  }
+}

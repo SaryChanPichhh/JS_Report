@@ -1,0 +1,170 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+    />
+    <style>
+            {{asset "data/reports/assets/report.css"}}
+    </style>
+</head>
+<body class="bg-white p-2">
+<div class="max-w-full text-xs">
+
+    <!-- HEADER SECTION -->
+    <div class="flex justify-between items-start border-b pb-2 mb-2">
+        <div class="flex items-center gap-3">
+            {{#if ShopImage}}
+                <img
+                        src="{{ShopImage}}"
+                        alt="Shop Logo"
+                        class="w-16 h-16 object-contain"
+                />
+            {{/if}}
+            <div>
+                <h1
+                        class="text-lg font-bold text-gray-800 leading-tight"
+                >{{ShopName}}</h1>
+                <p class="text-[10px] [@media(min-width:148mm)]:text-xs [@media(min-width:200mm)]:text-[13px] text-gray-700 ">
+                    Retail & Convenience Store</p>
+            </div>
+        </div>
+        <div class="text-right">
+            <h2
+                    class="text-xl font-bold text-primary tracking-wider mb-1"
+            >INVOICE</h2>
+            <div class="text-[10px] [@media(min-width:200mm)]:text-[13px] text-gray-600 space-y-0.5">
+                <div class=""><span class="font-semibold ">Invoice No:</span>
+                    {{TransRef}}</div>
+                <div class=""><span class="font-semibold ">Date:</span> {{TransDate}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- META DETAILS SECTION -->
+    <div class="grid grid-cols-2 gap-4 p-1 rounded mb-3">
+        <div class="text-[10px] [@media(min-width:148mm)]:text-xs [@media(min-width:200mm)]:text-[13px]">
+            <p
+                    class=" font-semibold text-gray-500 uppercase tracking-wider mb-0.5"
+            >Customer details</p>
+            <p class=" font-bold text-gray-800">{{CustomerName}}</p>
+            <p class=" text-gray-500">{{CustomerType}}</p>
+        </div>
+        <div class="text-right space-y-0.5 text-[10px] [@media(min-width:148mm)]:text-xs [@media(min-width:200mm)]:text-[13px] text-gray-600">
+            <p
+                    class="font-semibold text-gray-500 uppercase tracking-wider mb-0.5"
+            >Transaction metadata</p>
+            <div>{{Field1}}</div>
+            <div>{{Field2}}</div>
+        </div>
+    </div>
+
+    <!-- INVOICE ITEMS TABLE -->
+    <div class="detail mb-3">
+        <table class="w-full  text-[10px] [@media(min-width:148mm)]:text-xs [@media(min-width:200mm)]:text-[13px]">
+            <thead>
+            <tr class=" font-bold border-y text-gray-700">
+                <th class="p-1 text-center" style="width: 5%;">No.</th>
+                <th class="p-1 text-left" style="width: 17%;">Item Code</th>
+                <th class="p-1 text-left" style="width: 35%;">Description</th>
+                <th class="p-1 text-center" style="width: 8%;">Qty</th>
+                <th class="p-1 text-right" style="width: 10%;">Price</th>
+                <th class="p-1 text-right" style="width: 10%;">Disc.</th>
+                <th class="p-1 text-right" style="width: 15%;">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each Items}}
+                <tr
+                        class="border-b border-b-gray-400 border-dashed odd:bg-white even:bg-gray-100  text-[10px] [@media(min-width:148mm)]:text-xs [@media(min-width:200mm)]:text-[13px]"
+                >
+                    <td class="p-1.5 text-center text-gray-700">{{rowNumber
+                            @index
+                    }}</td>
+                    <td class="p-1.5 font-medium text-gray-700">{{ItemCode}}</td>
+                    <td class="p-1.5 text-gray-800 font-medium">{{ItemDesc}}</td>
+                    <td class="p-1.5 text-center font-medium">{{Qty}}</td>
+                    <td class="p-1.5 text-right text-gray-700">${{formatNumber
+                            UnitPrice
+                    }}</td>
+                    <td class="p-1.5 text-right text-gray-700">
+                        {{#if Discount}}
+                            ${{formatNumber Discount}}
+                        {{else}}
+                            -
+                        {{/if}}
+                    </td>
+                    <td
+                            class="p-1.5 text-right font-semibold text-gray-800"
+                    >${{formatNumber TotalPrice}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TOTALS & SUMMARY SECTION -->
+    <div class="grid grid-cols-12 gap-3 mb-3">
+        <!-- Notes & Exchange details on left -->
+        <div class="col-span-7 flex flex-col justify-between">
+            <div class="bg-gray-50 p-2 rounded text-[10px] [@media(min-width:148mm)]:text-xs  text-gray-600">
+                <span class="font-bold block text-gray-700 mb-0.5">Notes:</span>
+                <span class="font-medium">{{Note}}</span>
+            </div>
+
+        </div>
+
+        <!-- Totals summary table on right -->
+        <div class="col-span-5 text-right -text-[10px] [@media(min-width:148mm)]:text-xs [@media(min-width:200mm)]:text-[13px]">
+            <div class="space-y-1">
+                <div
+                        class="flex justify-between py-0.5 border-b border-dashed border-gray-200"
+                >
+                    <span class="text-gray-500 font-medium">Sub Total:</span>
+                    <span class="font-semibold text-gray-700">{{SubTotal}}</span>
+                </div>
+
+                {{#if DeliveryFee}}
+                    <div
+                            class="flex justify-between py-0.5 border-b border-dashed border-gray-200"
+                    >
+                        <span class="text-gray-500 font-medium">Delivery Fee:</span>
+                        <span class="font-semibold text-gray-700">${{formatNumber
+                                DeliveryFee
+                        }}</span>
+                    </div>
+                {{/if}}
+
+                {{#if DiscountInvoice}}
+                    <div
+                            class="flex justify-between py-0.5 border-b border-dashed border-gray-200"
+                    >
+                        <span class="text-gray-500 font-medium">Invoice Discount:</span>
+                        <span
+                                class="font-semibold text-red-600"
+                        >-{{DiscountInvoice}}</span>
+                    </div>
+                {{/if}}
+                <div
+                        class="flex justify-between py-1 bg-primary/5 px-1.5 rounded font-bold text-primary text-sm mt-1"
+                >
+                    <span>Grand Total:</span>
+                    <span>{{TransValue}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER THANK YOU -->
+    <div class="border-t pt-2 text-center  text-gray-600">
+        <p class=" text-[10px] [@media(min-width:148mm)]:text-xs ">Thank you for shopping!
+            Please come again.</p>
+        <p class="text-[9px] [@media(min-width:148mm)]:text-[11px]  mt-0.5 text-gray-600">Powered by MB POS System</p>
+    </div>
+
+</div>
+</body>
+</html>

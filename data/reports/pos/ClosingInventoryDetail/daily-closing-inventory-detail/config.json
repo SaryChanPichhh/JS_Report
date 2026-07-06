@@ -1,0 +1,23 @@
+{
+  "_id": "Hbh6RHEWY09C1N6w",
+  "shortid": "daily-closing-inventory-detail",
+  "$entitySet": "templates",
+  "name": "daily-closing-inventory-detail",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "data": {},
+  "chrome": {
+    "printBackground": true,
+    "width": "80mm",
+    "marginTop": "2mm",
+    "marginRight": "2mm",
+    "marginBottom": "2mm",
+    "marginLeft": "2mm"
+  },
+  "creationDate": {
+    "$$date": 1779759183082
+  },
+  "modificationDate": {
+    "$$date": 1779761984373
+  }
+}

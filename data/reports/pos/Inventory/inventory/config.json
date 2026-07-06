@@ -1,0 +1,16 @@
+{
+  "_id": "SusDsdn6gpi6zQJu",
+  "shortid": "inventory",
+  "$entitySet": "templates",
+  "name": "inventory",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "chrome": {
+    "printBackground": true,
+    "format": "A4",
+    "marginTop": "2mm",
+    "marginRight": "2mm",
+    "marginBottom": "2mm",
+    "marginLeft": "2mm"
+  }
+}

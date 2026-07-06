@@ -1,0 +1,118 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sale Movement</title>
+    <style>
+            {{asset "data/reports/assets/report.css"}}
+    </style>
+</head>
+<body>
+<div class="">
+    <div class="header relative">
+        <img
+                src="{{ShopImage}}"
+                alt="shop logo "
+                class="ml-8 w-28 h-28 object-contain absolute top-0 left-0"
+        />
+        <div class="flex flex-col justify-center items-center">
+            <p class="text-2xl">{{ShopName}}</p>
+            <p class="text-xl">Purchase And Sale Report</p>
+            <div class="flex items-center gap-1">
+                <p class="text-sm">{{formatDate StartDate}}</p>
+                <span>~</span>
+                <p class="text-sm">{{formatDate EndDate}}</p>
+            </div>
+            <div class="">
+                <p class="text-sm">Printed Date: {{formatDate PrintDate}}</p>
+            </div>
+        </div>
+        <div class=""></div>
+    </div>
+    <div class="detail mt-3">
+        <table class="w-full table-fixed border-collapse text-sm">
+            <colgroup>
+                <col style="width: 3%;"/>
+                <col style="width: 15%;"/>
+                <col style="width: 26%;"/>
+                <col style="width: 8%;"/>
+                <col style="width: 12%;"/>
+                <col style="width: 8%;"/>
+                <col style="width: 12%;"/>
+                <col style="width: 8%;"/>
+                <col style="width: 8%;"/>
+            </colgroup>
+            <thead>
+            <tr class="font-normal border-y">
+                <th class=" p-1" colspan="3"></th>
+
+                <th class=" p-1 text-center" colspan="2">Purchase</th>
+                <th class=" p-1 text-center" colspan="2">Sale</th>
+                <th class=" p-1 text-center" colspan="2">In Stock</th>
+            </tr>
+            <tr class="border-y">
+                <th class=" p-1 text-center">No.</th>
+                <th class=" p-1 text-left">Code</th>
+                <th class=" p-1 text-left">Item Name</th>
+                <th class=" p-1 text-center">Qty</th>
+                <th class=" p-1 text-center">Price</th>
+                <th class=" p-1 text-center">Qty</th>
+                <th class=" p-1 text-center">Price</th>
+                <th class=" p-1 text-center">Qty</th>
+                <th class=" p-1 text-center">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each Items}}
+                <tr class="odd:bg-white even:bg-gray-100 border-b border-b-gray-400 border-dashed">
+                    <td class="p-1 text-center">{{rowNumber @index}}</td>
+                    <td class="p-1 text-left">{{ItemCode}}</td>
+                    <td class="p-1 text-left">{{ItemDesc}}</td>
+                    <td class="p-1 text-center">{{TotalPurchaseQty}}</td>
+                    <td class="p-1 text-center">${{TotalPurchaseCost}}</td>
+                    <td class="p-1 text-center">{{TotalSaleQty}}</td>
+                    <td class="p-1 text-center">${{TotalSaleCost}}</td>
+                    <td class="p-1 text-center">{{TotalRemainQty}}</td>
+                    <td class="p-1 text-center">${{TotalRemainCost}}</td>
+                </tr>
+            {{/each}}
+
+            </tbody>
+            <tfoot>
+            <tr class="font-bold border-t  border-dashed">
+                <td
+                        class=" p-1 text-center"
+                        colspan="3"
+                >Total
+                </td>
+                <td class=" p-1 text-center">{{sumTotal
+                        Items
+                        "TotalPurchaseQty"
+                }}</td>
+                <td class=" p-1 text-center">${{sumTotal
+                        Items
+                        "TotalPurchaseCost"
+                }}</td>
+                <td class=" p-1 text-center">{{sumTotal
+                        Items
+                        "TotalSaleQty"
+                }}</td>
+                <td class=" p-1 text-center">${{sumTotal
+                        Items
+                        "TotalSaleCost"
+                }}</td>
+                <td class=" p-1 text-center">{{sumTotal
+                        Items
+                        "TotalRemainQty"
+                }}</td>
+                <td class=" p-1 text-center">${{sumTotal
+                        Items
+                        "TotalRemainCost"
+                }}</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+</body>
+</html>

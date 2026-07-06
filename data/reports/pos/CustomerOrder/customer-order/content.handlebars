@@ -1,0 +1,93 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      {{asset "data/reports/assets/report.css"}}
+    </style>
+  </head>
+  <body class="p-1 text-xs bg-white">
+
+    <!-- REPORT HEADER -->
+    <div class="text-center mb-1">
+      <div class="text-sm font-bold [@media(min-width:140mm)]:text-[16px]">Customer Order Report</div>
+      <div class="text-xs [@media(min-width:140mm)]:text-[14px]">{{formatDate Dates}}</div>
+      <div class="text-xs flex items-center mt-2 [@media(min-width:140mm)]:text-[14px]">
+        <span>Customer : </span>
+        <span>{{CustomerName}}</span>
+
+      </div>
+    </div>
+
+    {{#each (groupByDateThenTransRef Items)}}
+      <!-- DATE GROUP HEADER -->
+      <div class="date-header text-xs px-1 py-1 mt-1 text-white bg-primary [@media(min-width:140mm)]:text-[14px]">
+        Invoice Date:
+        {{InvoiceDate}}
+      </div>
+
+      {{#each TransRefGroups}}
+        <!-- GROUP HEADER -->
+        <div class="flex justify-between text-xs font-medium py-1 [@media(min-width:140mm)]:text-[14px]">
+          <div>
+            <span class="">Ref No:</span>
+            <span>{{TransRef}}</span>
+          </div>
+        </div>
+
+        <!-- DETAIL TABLE -->
+        <div class="">
+          <table class="w-full table-fixed border-collapse text-xs">
+            <colgroup>
+              <col style="width: 46%;" />
+              <col style="width: 8%;" />
+              <col style="width: 16%;" />
+              <col style="width: 14%;" />
+              <col style="width: 18%;" />
+            </colgroup>
+            <thead>
+              <tr class="border-y">
+                <th class="p-0.5 text-left [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">Description</th>
+                <th class="p-0.5 text-center [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">Qty</th>
+                <th class="p-0.5 text-right [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">Price</th>
+                <th class="p-0.5 text-right [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">Disc.</th>
+                <th class="p-0.5 text-right [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each Items}}
+                <tr class="odd:bg-white even:bg-gray-100">
+                  <td class="px-0.5 py-0.5 [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">{{ItemDesc}}</td>
+                  <td class="px-0.5 py-0.5 text-center [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">{{Qty}}</td>
+                  <td class="px-0.5 py-0.5 text-right [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">${{FinalPrice}}</td>
+                  <td class="px-0.5 py-0.5 text-right [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">${{DiscountPrice}}</td>
+                  <td class="px-0.5 py-0.5 text-right [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">${{Total}}</td>
+                </tr>
+              {{/each}}
+              <tr class="border-t border-dashed">
+                <td colspan="1" class="p-0.5 text-center [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">Total</td>
+                <td class="p-0.5 text-center [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">{{sumQuantity
+                    Items
+                    "Qty"
+                  }}</td>
+                  <td class="p-0.5 text-right [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1"></td>
+                  <td class="p-0.5 text-right [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">${{sumTotal
+                          Items
+                          "DiscountPrice"
+                  }}</td>
+                <td class="p-0.5 text-right [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:p-1">${{sumTotal Items "Total"}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      {{/each}}
+    {{/each}}
+
+    <!-- REPORT FOOTER -->
+    <div class="text-center mt-2 pt-2 text-xs [@media(min-width:140mm)]:text-[14px]">
+      Powered by MB POS
+    </div>
+
+  </body>
+</html>

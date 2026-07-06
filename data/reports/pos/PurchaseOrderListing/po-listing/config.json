@@ -1,0 +1,26 @@
+{
+  "_id": "RsgiE56vaypHB5sY",
+  "shortid": "po-listing",
+  "$entitySet": "templates",
+  "name": "po-listing",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "data": {
+    "shortid": "poListData001"
+  },
+  "chrome": {
+    "format": "A4",
+    "printBackground": true,
+    "landscape": true,
+    "marginTop": "2mm",
+    "marginRight": "2mm",
+    "marginBottom": "2mm",
+    "marginLeft": "2mm"
+  },
+  "creationDate": {
+    "$$date": 1779759183082
+  },
+  "modificationDate": {
+    "$$date": 1779761984373
+  }
+}

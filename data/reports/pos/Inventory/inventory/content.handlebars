@@ -1,0 +1,153 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Status Report</title>
+    <style>
+      {{asset "data/reports/assets/report.css"}}
+    </style>
+  </head>
+  <body class="bg-white text-slate-900 p-1.5">
+    <div class="w-full">
+
+      <!-- Header Section -->
+      <div
+        class="flex justify-between items-start border-b-2 border-primary pb-2 mb-2"
+      >
+        <div class="flex items-center gap-4">
+          {{#if ShopImage}}
+            <div
+              class="w-16 h-16 rounded-lg border border-slate-300 bg-slate-100 p-1 flex items-center justify-center"
+            >
+              <img
+                class="max-w-full max-h-full object-contain"
+                src="{{ShopImage}}"
+                alt="{{ShopName}} Logo"
+                onerror="this.style.display='none';"
+              />
+            </div>
+          {{/if}}
+          <div class="flex flex-col">
+            <h1
+              class="text-lg font-bold text-slate-900 leading-tight"
+            >{{ShopName}}</h1>
+            <p class="text-[11px] text-gray-500 mt-0.5">Inventory Valuation &
+              Stock Status</p>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <h2
+            class="text-xl font-bold text-primary mb-1 tracking-wider"
+          >INVENTORY REPORT</h2>
+          <div class="grid grid-cols-2 gap-1 text-[11px] text-gray-700">
+            <span class="text-right font-semibold">Print Date:</span>
+            <span class="text-left">{{formatDate PrintDate}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Metrics Cards (2x2 Grid) -->
+
+      <!-- Inventory Details Table -->
+      <table class="w-full border-collapse table-fixed">
+        <colgroup>
+          <col style="width: 8%;" />
+          <col style="width: 20%;" />
+          <!-- Code -->
+          <col style="width: 32%;" />
+          <!-- Description -->
+          <col style="width: 10%;" />
+          <!-- Stock -->
+          <col style="width: 13%;" />
+          <!-- Cost Price (USD) -->
+          <col style="width: 15%;" />
+          <!-- Total Cost (USD) -->
+        </colgroup>
+        <thead>
+          <tr class="bg-gray-100 border-b-2 border-gray-300">
+            <th
+              class="text-left font-bold uppercase text-[13px] text-gray-600 p-1.5 tracking-wider"
+            >No.</th>
+            <th
+              class="text-left font-bold uppercase text-[13px] text-gray-600 p-1.5 tracking-wider"
+            >Code</th>
+            <th
+              class="text-left font-bold uppercase text-[13px] text-gray-600 p-1.5 tracking-wider"
+            >Description</th>
+            <th
+              class="text-center font-bold uppercase text-[13px] text-gray-600 p-1.5 tracking-wider"
+            >Qty</th>
+            <th
+              class="text-right font-bold uppercase text-[13px] text-gray-600 p-1.5 tracking-wider"
+            >Cost</th>
+            <th
+              class="text-right font-bold uppercase text-[13px] text-gray-600 p-1.5 tracking-wider"
+            >Total</th>
+        </thead>
+        <tbody>
+          {{#each (groupByCategory Items)}}
+            <!-- Category Header Row -->
+            <tr class="bg-primary text-white border-b border-primary">
+              <td
+                colspan="3"
+                class="p-1.5 font-bold text-xs uppercase tracking-wider"
+              >
+                Category:
+                {{Category}}
+              </td>
+              <td
+                class="p-1.5 text-center font-bold text-xs"
+              >{{subTotalStock}}</td>
+              <td class="p-1.5 text-right"></td>
+              <td class="p-1.5 text-right font-bold text-xs">{{formatUSD
+                  subTotalCostUSD
+                }}</td>
+            </tr>
+
+            <!-- Category Items Row -->
+            {{#each Items}}
+              <tr class="border-b border-gray-200 even:bg-gray-50">
+                   <td
+                  class="p-1.5 text-xs font-mono text-gray-600"
+                >{{rowNumber @index}}</td>
+                <td
+                  class="p-1.5 text-[13px] font-mono text-gray-600"
+                >{{ItemCode}}</td>
+                <td
+                  class="p-1.5 text-xs font-medium text-slate-900"
+                >{{ItemDesc}}</td>
+                <td
+                  class="p-1.5 text-xs text-center text-slate-900"
+                >{{Stock}}</td>
+                <td
+                  class="p-1.5 text-xs text-right text-slate-900"
+                >{{formatUSD CostPrice}}</td>
+                <td
+                  class="p-1.5 text-xs text-right font-semibold text-slate-900"
+                >{{formatUSD (lineTotalUSD Stock CostPrice)}}</td>
+              </tr>
+            {{/each}}
+          {{/each}}
+
+          <!-- Grand Total Row -->
+          <tr
+            class=" border-t-2  border-primary font-bold"
+          >
+            <td
+              colspan="3"
+              class="p-1.5 text-[13px] text-slate-900 text-left uppercase"
+            >GRAND TOTAL</td>
+            <td class="p-1.5 text-[13px] text-slate-900 text-center">{{totalStock
+                Items
+              }}</td>
+            <td></td>
+            <td class="p-1.5 text-[13px] text-primary text-right">{{formatUSD
+                (totalCostUSD Items)
+              }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

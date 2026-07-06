@@ -44,7 +44,7 @@ function groupBySellerAndDate(data) {
       accumulator[seller][date] = {
         Date: date,
         Items: [],
-        Subtotal: 0,
+        SubTotal: 0,
         TotalPrice: 0,
         TotalRiel: 0,
         TotalDollar: 0,
@@ -59,7 +59,7 @@ function groupBySellerAndDate(data) {
     accumulator[seller][date].Items =
       accumulator[seller][date].Items.concat(items);
 
-    accumulator[seller][date].Subtotal += Number(currentValue.Subtotal || 0);
+    accumulator[seller][date].SubTotal += Number(currentValue.SubTotal || 0);
     accumulator[seller][date].TotalPrice += Number(
       currentValue.TotalPrice || 0,
     );
@@ -73,7 +73,8 @@ function groupBySellerAndDate(data) {
         date
       ].Payments.concat(currentValue.Payments);
     }
-
+    console.log(`data : ${JSON.stringify(accumulator)}`
+    )
     return accumulator;
   }, {});
 
@@ -89,10 +90,6 @@ function groupBySellerAndDate(data) {
           }),
       };
     });
-}
-
-function groupBySeller(data) {
-  return groupBySellerAndDate(data);
 }
 
 function formatNumber(value) {
@@ -214,7 +211,6 @@ module.exports = {
   itemName,
   lineTotal,
   groupBySellerAndDate,
-  groupBySeller,
   formatNumber,
   groupByPaymentType,
   groupPayments,

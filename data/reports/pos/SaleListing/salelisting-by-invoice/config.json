@@ -1,0 +1,18 @@
+{
+  "_id": "salelstbyinvocpdf",
+  "shortid": "salelisting-by-invoice",
+  "$entitySet": "templates",
+  "name": "salelisting-by-invoice",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "data": {},
+  "chrome": {
+    "printBackground": true,
+    "format": "A4",
+    "landscape": false,
+    "marginTop": "1mm",
+    "marginRight": "1mm",
+    "marginBottom": "1mm",
+    "marginLeft": "1mm"
+  }
+}

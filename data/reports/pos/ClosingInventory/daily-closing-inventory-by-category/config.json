@@ -1,0 +1,19 @@
+{
+  "_id": "VnybPYTRj5XGghYu",
+  "shortid": "daily-closing-inventory-by-category",
+  "$entitySet": "templates",
+  "name": "daily-closing-inventory-by-category",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "data": {
+    "shortid": "poListData001"
+  },
+  "chrome": {
+    "printBackground": true,
+    "width": "80mm",
+    "marginTop": "0mm",
+    "marginRight": "0mm",
+    "marginBottom": "0mm",
+    "marginLeft": "0mm"
+  }
+}

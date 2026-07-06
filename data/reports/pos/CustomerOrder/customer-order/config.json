@@ -1,0 +1,23 @@
+{
+  "_id": "F7idYgEwXR9tDXbZ",
+  "shortid": "customer-order",
+  "$entitySet": "templates",
+  "name": "customer-order",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "data": {},
+  "chrome": {
+    "printBackground": true,
+    "width": "80mm",
+    "marginTop": "1mm",
+    "marginRight": "1mm",
+    "marginBottom": "1mm",
+    "marginLeft": "1mm"
+  },
+  "creationDate": {
+    "$$date": 1779759183082
+  },
+  "modificationDate": {
+    "$$date": 1779761984373
+  }
+}

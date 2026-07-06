@@ -1,0 +1,235 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Closing Inventory Category Report</title>
+    <style>
+      {{asset "data/reports/assets/report.css"}}
+    </style>
+  </head>
+  <body class="bg-white text-slate-900 p-0 font-sans">
+    <div class="w-[74mm] [@media(min-width:140mm)]:w-full [@media(min-width:140mm)]:max-w-[210mm] mx-auto p-0 [@media(min-width:140mm)]:p-4">
+
+      <!-- Header Section -->
+      <div class="flex flex-col border-gray-300 pb-2 [@media(min-width:140mm)]:flex-row [@media(min-width:140mm)]:justify-between [@media(min-width:140mm)]:items-baseline [@media(min-width:140mm)]:border-b [@media(min-width:140mm)]:mb-4">
+        <div>
+          <h1
+            class="text-center [@media(min-width:140mm)]:text-left text-sm [@media(min-width:140mm)]:text-2xl font-bold text-slate-900 uppercase tracking-wider"
+          >Daily Closing Inventory</h1>
+          <p class="text-center [@media(min-width:140mm)]:text-left text-[10px] [@media(min-width:140mm)]:text-xs text-gray-500 leading-tight">Grouped By Category</p>
+        </div>
+
+        <div class="grid grid-cols-1 [@media(min-width:140mm)]:grid-cols-2 [@media(min-width:140mm)]:gap-x-8 gap-y-1 mt-2 text-[11px] [@media(min-width:140mm)]:text-sm text-gray-700 [@media(min-width:140mm)]:mt-0">
+          <div class="flex justify-between items-center gap-4 leading-tight">
+            <span class="font-semibold text-slate-900">Seller:</span>
+            <span>{{Seller}}</span>
+          </div>
+          <div class="flex justify-between items-center gap-4 leading-tight">
+            <span class="font-semibold text-slate-900">Duration:</span>
+            <span>{{Duration}}</span>
+          </div>
+          <div class="flex justify-between items-center gap-4 leading-tight">
+            <span class="font-semibold text-slate-900">Closing Date:</span>
+            <span>{{formatDate Dates}}</span>
+          </div>
+          <div class="flex justify-between items-center gap-4 leading-tight">
+            <span class="font-semibold text-slate-900">Print Date:</span>
+            <span>{{formatDateTime PrintDate}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category-Grouped Details Table -->
+      <table class="w-full border-collapse table-fixed text-[10px] [@media(min-width:140mm)]:text-[13px]">
+        <colgroup>
+          <col style="width: 35%;" />
+          <!-- Description -->
+          <col style="width: 10%;" />
+          <!-- Qty -->
+          <col style="width: 17%;" />
+          <!-- Unit Price -->
+          <col style="width: 18%;" />
+          <!-- Discount -->
+          <col style="width: 20%;" />
+          <!-- Line Total -->
+        </colgroup>
+        <thead>
+          <tr class="border-y border-gray-300">
+            <th
+              class="text-left font-bold uppercase text-[9px] [@media(min-width:140mm)]:text-[11px] text-gray-800 py-1 [@media(min-width:140mm)]:py-2"
+            >Name</th>
+            <th
+              class="text-center font-bold uppercase text-[9px] [@media(min-width:140mm)]:text-[11px] text-gray-800 py-1 [@media(min-width:140mm)]:py-2"
+            >Qty</th>
+            <th
+              class="text-center font-bold uppercase text-[9px] [@media(min-width:140mm)]:text-[11px] text-gray-800 py-1 [@media(min-width:140mm)]:py-2"
+            >Price</th>
+            <th
+              class="text-right font-bold uppercase text-[9px] [@media(min-width:140mm)]:text-[11px] text-gray-800 py-1 [@media(min-width:140mm)]:py-2"
+            >Disc.</th>
+            <th
+              class="text-right font-bold uppercase text-[9px] [@media(min-width:140mm)]:text-[11px] text-gray-800 py-1 [@media(min-width:140mm)]:py-2"
+            >Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each (groupByCategoryCode Items ExchangeRate)}}
+            <!-- Category Header Row -->
+            <tr class="bg-primary text-white border-b border-primary">
+              <td
+                colspan="1"
+                class="p-1 [@media(min-width:140mm)]:py-1.5 [@media(min-width:140mm)]:px-2 font-bold text-[9px] [@media(min-width:140mm)]:text-[11px] uppercase tracking-wider text-left leading-tight"
+              >
+                {{CategoryDesc}}
+              </td>
+              <td
+                class="p-1 [@media(min-width:140mm)]:py-1.5 text-center font-bold text-[9px] [@media(min-width:140mm)]:text-[11px]"
+              >{{SubTotalQty}}</td>
+
+              <td
+                colspan="3"
+                class="p-1 [@media(min-width:140mm)]:py-1.5 [@media(min-width:140mm)]:px-2 text-right font-bold text-[9px] [@media(min-width:140mm)]:text-[11px]"
+              >{{formatUSD SubTotalUSD}}</td>
+            </tr>
+
+            <!-- Category Items Row -->
+            {{#each Items}}
+              <tr class="border-b border-gray-100 py-1 [@media(min-width:140mm)]:py-2 even:bg-gray-50">
+                <td
+                  class="text-left py-1 pr-1 text-[10px] [@media(min-width:140mm)]:text-[13px] font-bold leading-tight text-slate-900"
+                >
+                  {{ItemDesc}}
+                  <span
+                    class="text-[9px] [@media(min-width:140mm)]:text-[11px] text-gray-600 font-mono block"
+                  >{{ItemCode}}</span>
+                </td>
+                <td
+                  class="text-center py-1 text-[10px] [@media(min-width:140mm)]:text-[13px] font-bold text-slate-900"
+                >{{Qty}}</td>
+                <td
+                  class="text-center py-1 text-[10px] [@media(min-width:140mm)]:text-[13px] font-bold text-slate-900"
+                >{{formatUSD Price}}</td>
+                <td class="text-right py-1 text-[10px] [@media(min-width:140mm)]:text-[13px] font-bold text-red-600">{{formatUSD
+                    DiscountPrice
+                  }}</td>
+                <td
+                  class="text-right py-1 text-[10px] [@media(min-width:140mm)]:text-[13px] font-bold text-slate-900"
+                >{{formatUSD Total}}</td>
+              </tr>
+            {{/each}}
+          {{/each}}
+
+          <!-- Grand Total Row -->
+          <tr class="border-b border-primary"></tr>
+          <tr
+            class="bg-gray-100 font-bold text-[11px] [@media(min-width:140mm)]:text-[14px]"
+          >
+            <td class="py-1 [@media(min-width:140mm)]:py-2 text-left uppercase text-slate-900">GRAND TOTAL</td>
+            <td class="py-1 [@media(min-width:140mm)]:py-2 text-center text-slate-900">{{totalQty Items}}</td>
+            <td colspan="2" class="py-1 [@media(min-width:140mm)]:py-2 text-right"></td>
+            <td class="py-1 [@media(min-width:140mm)]:py-2 text-right text-primary">{{formatUSD
+                (totalItemCostUSD Items)
+              }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Side-by-side layout for Payment Methods & Expenses on A4 -->
+      <div class="grid grid-cols-1 [@media(min-width:140mm)]:grid-cols-2 [@media(min-width:140mm)]:gap-8">
+        <!-- Payments Section -->
+        <div class="flex flex-col mt-4">
+          <span
+            class="text-center py-0.5 [@media(min-width:140mm)]:py-1.5 border-y border-gray-600 font-bold text-[10px] [@media(min-width:140mm)]:text-[12px] text-primary uppercase tracking-wider mb-1"
+          >Payment Methods</span>
+          <div class="flex flex-col">
+            {{#each Payments}}
+              <div
+                class="flex justify-between items-center py-0.5 [@media(min-width:140mm)]:py-1.5 text-[11px] [@media(min-width:140mm)]:text-[13px] border-b border-dashed border-gray-400 last:border-0"
+              >
+                <span class="text-slate-900 font-medium">{{PaymentType}}</span>
+                <span class="font-bold text-slate-900">{{formatUSD
+                    TotalReceived
+                  }}</span>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+
+        <!-- Expenses Section -->
+        <div class="flex flex-col mt-3 [@media(min-width:140mm)]:mt-4">
+          <span
+            class="text-center py-0.5 [@media(min-width:140mm)]:py-1.5 border-y border-gray-600 font-bold text-[10px] [@media(min-width:140mm)]:text-[12px] text-primary uppercase tracking-wider mb-1"
+          >Expenses Listing</span>
+          <div class="flex flex-col">
+            {{#each Expenses}}
+              <div
+                class="flex justify-between items-start py-0.5 [@media(min-width:140mm)]:py-1.5 text-[11px] [@media(min-width:140mm)]:text-[13px] border-b border-dashed border-gray-400 last:border-0"
+              >
+                <div class="flex flex-col">
+                  <span
+                    class="text-slate-900 font-medium leading-tight"
+                  >{{ExpenseDesc}}</span>
+                  <span class="text-[9px] [@media(min-width:140mm)]:text-[11px] text-gray-700 font-mono">by
+                    {{ExpenseBy}}</span>
+                </div>
+                <span class="font-bold text-red-600">{{formatUSD
+                    ExpenseAmount
+                  }}</span>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Summary Section -->
+      <div
+        class="flex flex-col mt-3 bg-gray-50 border border-gray-200 rounded p-2 [@media(min-width:140mm)]:max-w-[360px] [@media(min-width:140mm)]:ml-auto [@media(min-width:140mm)]:mt-6 [@media(min-width:140mm)]:p-4"
+      >
+        <span
+          class="text-center pb-1 border-b border-gray-600 font-bold text-[10px] [@media(min-width:140mm)]:text-[12px] text-primary uppercase tracking-wider mb-1"
+        >Summary</span>
+        <div class="flex flex-col gap-0.5 text-[11px] [@media(min-width:140mm)]:text-[13px]">
+          <div class="flex justify-between items-center py-0.5">
+            <span class="text-gray-600">Subtotal (Gross)</span>
+            <span class="font-medium text-slate-900">{{formatUSD
+                SubTotal
+              }}</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5 text-red-600">
+            <span>Discounts</span>
+            <span>-{{formatUSD Discount}}</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5">
+            <span class="text-gray-600">VAT / Tax</span>
+            <span class="font-medium text-slate-900">{{formatUSD Vat}}</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5 text-red-600">
+            <span>Expenses</span>
+            <span>-{{formatUSD Expense}}</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5">
+            <span class="text-gray-600">Cash Change</span>
+            <span class="font-medium text-slate-900">{{formatUSD
+                CashChange
+              }}</span>
+          </div>
+          <div class="border-t border-gray-600 my-1"></div>
+          <div
+            class="flex justify-between items-center py-0.5 text-xs [@media(min-width:140mm)]:text-[14px] font-bold text-primary"
+          >
+            <span>Grand Total</span>
+            <span>{{formatUSD TotalDollar}}</span>
+          </div>
+   
+        </div>
+      </div>
+
+      <!-- Powered By Footer -->
+      <div
+        class="text-center mt-5 pt-1.5 border-t border-gray-200 text-[10px] [@media(min-width:140mm)]:text-[11.5px] text-gray-400"
+      >
+        Powered by MB POS
+      </div>
+    </div>
+  </body>
+</html>

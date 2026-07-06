@@ -18,20 +18,21 @@
           <p class="text-2xl">{{ShopName}}</p>
           <p class="text-xl">Daily Sale Detail Report</p>
           <div class="flex items-center gap-1">
-            <p class="text-sm">Start Date: {{formatDate StartDate}}</p>
+            <p class="text-sm">{{formatDate StartDate}}</p>
             <span>~</span>
-            <p class="text-sm">End Date: {{formatDate EndDate}}</p>
+            <p class="text-sm">{{formatDate EndDate}}</p>
           </div>
           <div class="">
-            <p class="text-sm">Printed On: {{formatDate PrintDate}}</p>
+            <p class="text-sm">Printed: {{formatDate PrintDate}}</p>
           </div>
         </div>
         <div class="mr-24"></div>
       </div>
         <div class="detail my-3">
-          <table class="w-full border-collapse text-xs">
+          <table class="w-full text-sm">
             <thead>
-              <tr> <th
+              <tr>
+                  <th
                   class="border-y p-1 text-center"
                   style="width: 5%;"
                 >No.</th>
@@ -62,30 +63,31 @@
             </thead>
             <tbody> 
               {{#each Data}}
-                <tr class="odd:bg-white even:bg-gray-100">
-                  <td class="border-y p-1 text-center">{{rowNumber @index}}</td>
-                  <td class="border-y p-1 text-center">{{Date}}</td>
-                  <td class="border-y p-1 text-center">{{formatMoney SalePrice 'en-US' 'USD' }}</td>
-                  <td class="border-y p-1 text-center">{{formatMoney Discount 'en-US' 'USD' }}</td>
-                  <td class="border-y p-1 text-center">{{formatMoney (netPrice SalePrice Discount) 'en-US' 'USD' }}</td>
-                  <td class="border-y p-1 text-center">{{formatMoney Cost 'en-US' 'USD' }}</td>
-                  <td class="border-y p-1 text-center">{{formatMoney Expense 'en-US' 'USD' }}</td>
+                <tr class="odd:bg-white even:bg-gray-100 border-b border-b-gray-400 border-dashed">
+                  <td class=" p-1 text-center">{{rowNumber @index}}</td>
+                  <td class=" p-1 text-center">{{Date}}</td>
+                  <td class=" p-1 text-center">{{formatMoney SalePrice 'en-US' 'USD' }}</td>
+                  <td class=" p-1 text-center">{{formatMoney Discount 'en-US' 'USD' }}</td>
+                  <td class=" p-1 text-center">{{formatMoney (netPrice SalePrice Discount) 'en-US' 'USD' }}</td>
+                  <td class=" p-1 text-center">{{formatMoney Cost 'en-US' 'USD' }}</td>
+                  <td class=" p-1 text-center">{{formatMoney Expense 'en-US' 'USD' }}</td>
                 </tr>
               {{/each}}
               <!-- Subtotal row for the date group -->
             </tbody>
             <tfoot>
-              <tr class="font-bold bg-gray-100 border-t-2">
-                <td class="border-y p-1 text-center" colspan="2">Total</td>
-                <td class="border-y p-1 text-center">{{formatMoney (sumField Data "SalePrice" ) 'en-US' 'USD' }}</td>
-                <td class="border-y p-1 text-center">{{formatMoney (sumField Data "Discount" ) 'en-US' 'USD' }}</td>
-                <td class="border-y p-1 text-center">{{formatMoney (sumNetPrice Data) 'en-US' 'USD' }}</td>
-                <td class="border-y p-1 text-center">{{formatMoney (sumField Data "Cost" ) 'en-US' 'USD' }}</td>
-                <td class="border-y p-1 text-center">{{formatMoney (sumField Data "Expense" ) 'en-US' 'USD' }}</td>
+              <tr class="font-bold border-t-2">
+                <td class=" p-1 text-center" colspan="2">Total</td>
+                <td class=" p-1 text-center">{{formatMoney (sumField Data "SalePrice" ) 'en-US' 'USD' }}</td>
+                <td class=" p-1 text-center">{{formatMoney (sumField Data "Discount" ) 'en-US' 'USD' }}</td>
+                <td class=" p-1 text-center">{{formatMoney (sumNetPrice Data) 'en-US' 'USD' }}</td>
+                <td class=" p-1 text-center">{{formatMoney (sumField Data "Cost" ) 'en-US' 'USD' }}</td>
+                <td class=" p-1 text-center">{{formatMoney (sumField Data "Expense" ) 'en-US' 'USD' }}</td>
               </tr>
             </tfoot>
           </table>
           
         </div>
+    </div>
   </body>
 </html>

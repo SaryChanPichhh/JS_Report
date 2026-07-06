@@ -1,0 +1,153 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      {{asset "data/reports/assets/report.css"}}
+
+    </style>
+  </head>
+
+  <body class="bg-white text-slate-900 p-0 font-sans">
+    <div class="w-[74mm] [@media(min-width:140mm)]:w-full [@media(min-width:140mm)]:max-w-[210mm] mx-auto p-0 [@media(min-width:140mm)]:p-4">
+      <div class="flex flex-col border-gray-300 pb-2 [@media(min-width:140mm)]:flex-row [@media(min-width:140mm)]:justify-between [@media(min-width:140mm)]:items-baseline [@media(min-width:140mm)]:border-b [@media(min-width:140mm)]:mb-4">
+        <div>
+          <h1 class="text-center [@media(min-width:140mm)]:text-left text-sm [@media(min-width:140mm)]:text-2xl font-bold text-slate-900 uppercase tracking-wider">
+            Daily Closing Inventory Details
+          </h1>
+        </div>
+        <div class="grid grid-cols-1 [@media(min-width:140mm)]:grid-cols-2 [@media(min-width:140mm)]:gap-x-8 gap-y-1 mt-2 text-[11px] [@media(min-width:140mm)]:text-sm text-gray-700 [@media(min-width:140mm)]:mt-0">
+          <div class="flex justify-between items-center gap-4 leading-tight ">
+            <span class="font-semibold text-slate-900 text-[13px]">Start Date:</span>
+            <span class="text-[13px]">{{formatDate PrintDate}}</span>
+          </div>
+          <div class="flex justify-between items-center gap-4 leading-tight">
+            <span class="font-semibold text-slate-900 text-[13px]" >Duration:</span>
+            <span class="text-[13px]">{{Duration}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="detail ">
+            <div class="groupby-seller ">
+                {{#each (groupBySellerAndDate DailyClosings)}}
+                    <div class="seller-name flex items-center justify-between gap-1 leading-5 bg-primary text-white px-1 py-0.5 [@media(min-width:140mm)]:py-1 [@media(min-width:140mm)]:px-2">
+                        <div class="flex items-center gap-1">
+                            <span class="text-[13px] [@media(min-width:140mm)]:text-[16px]">Seller :</span>
+                            <span class="text-[13px] [@media(min-width:140mm)]:text-[16px]">{{Seller}}</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <span class="text-[13px] [@media(min-width:140mm)]:text-[16px]">Total :</span>
+                            <span class="text-[13px] [@media(min-width:140mm)]:text-[16px]">{{formatNumber ../SubTotal}}</span>
+                        </div>
+                    </div>
+                    {{#each Dates}}
+                        <div class="date-name text-[13px] [@media(min-width:140mm)]:text-[15px] font-medium bg-gray-100 px-1 py-0.5 [@media(min-width:140mm)]:py-1 [@media(min-width:140mm)]:px-2">Date: {{Date}}</div>
+                        <table class="w-full table-fixed border-collapse text-[9px] [@media(min-width:140mm)]:text-[13px] mb-3">
+                            <colgroup>
+                                <col style="width: 35%;" />
+                                <col style="width: 10%;" />
+                                <col style="width: 17%;" />
+                                <col style="width: 18%;" />
+                                <col style="width: 20%;" />
+                            </colgroup>
+                            <thead>
+                                <tr class="border-y border-gray-300">
+                                    <th class="text-[11px] [@media(min-width:140mm)]:text-sm py-0.5 [@media(min-width:140mm)]:py-1.5 text-left font-normal">
+                                        Name</th>
+                                    <th
+                                        class="text-[11px] [@media(min-width:140mm)]:text-sm py-0.5 [@media(min-width:140mm)]:py-1.5 text-center font-normal"
+                                    >Qty</th>
+                                    <th
+                                        class="text-[11px] [@media(min-width:140mm)]:text-sm py-0.5 [@media(min-width:140mm)]:py-1.5 text-center font-normal"
+                                    >Price</th>
+                                    <th
+                                        class="text-[11px] [@media(min-width:140mm)]:text-sm py-0.5 [@media(min-width:140mm)]:py-1.5 text-right font-normal"
+                                    >Disc.</th>
+                                    <th
+                                        class="text-[11px] [@media(min-width:140mm)]:text-sm py-0.5 [@media(min-width:140mm)]:py-1.5 text-right font-normal"
+                                    >Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each Items}}
+                                    <tr class="border-b border-gray-100 py-0.5 [@media(min-width:140mm)]:py-1.5 even:bg-gray-50">
+                                        <td class="py-0.5 [@media(min-width:140mm)]:py-1.5 text-left text-[11px] [@media(min-width:140mm)]:text-[13px]">{{itemName this}}</td>
+                                        <td class="py-0.5 [@media(min-width:140mm)]:py-1.5 text-center text-[11px] [@media(min-width:140mm)]:text-[13px]">{{Qty}}</td>
+                                        <td class="py-0.5 [@media(min-width:140mm)]:py-1.5 text-center text-[11px] [@media(min-width:140mm)]:text-[13px]">{{formatNumber Price}}</td>
+                                        <td class="py-0.5 [@media(min-width:140mm)]:py-1.5 text-right text-[11px] [@media(min-width:140mm)]:text-[13px] text-red-600">{{formatNumber DiscountPrice}}</td>
+                                        <td class="py-0.5 [@media(min-width:140mm)]:py-1.5 text-right text-[11px] [@media(min-width:140mm)]:text-[13px]">{{formatNumber (lineTotal this)}}</td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    {{/each}}
+                {{/each}}
+            </div>
+
+            <!-- Summary Footer Section -->
+            <div class="mt-3  border-gray-200 pt-3 flex flex-col  [@media(min-width:140mm)]:gap-8 [@media(min-width:140mm)]:items-end">
+
+                <!-- Financial Totals - Shows on Right in A4, Top in 80mm -->
+                <div class="w-full [@media(min-width:140mm)]:max-w-[360px] [@media(min-width:140mm)]:bg-gray-50 [@media(min-width:140mm)]:border [@media(min-width:140mm)]:border-gray-200 [@media(min-width:140mm)]:rounded [@media(min-width:140mm)]:p-4 flex flex-col text-[13px] [@media(min-width:140mm)]:text-[14px] border-t">
+
+                    <div class="flex justify-between py-0.5">
+                        <span>Total Discount</span>
+                        <span>{{formatNumber (sumTotalDiscount DailyClosings)}}</span>
+                    </div>
+                    <div class="flex justify-between py-0.5">
+                        <span>Sub Total</span>
+                        <span>{{formatNumber SubTotal}}</span>
+                    </div>
+                    <div class="flex justify-between py-0.5">
+                        <span>Discount On Invoice</span>
+                        <span>{{formatNumber DiscountInvoice}}</span>
+                    </div>
+                    <div class="flex justify-between py-0.5 font-bold text-primary [@media(min-width:140mm)]:text-lg [@media(min-width:140mm)]:border-t [@media(min-width:140mm)]:border-gray-600 [@media(min-width:140mm)]:mt-1 [@media(min-width:140mm)]:pt-1">
+                        <span>Total</span>
+                        <span>{{formatNumber TotalDollar}}</span>
+                    </div>
+                </div>
+
+                <!-- Payments & Group Footers - Shows on Left in A4, Bottom in 80mm -->
+                <div class="w-full [@media(min-width:140mm)]:flex-1 flex flex-col text-[13px] [@media(min-width:140mm)]:text-[14px] mt-1 [@media(min-width:140mm)]:mt-0">
+                    <!-- Payments Section -->
+                    <div class="text-center py-1 border-y border-black text-sm [@media(min-width:140mm)]:text-left [@media(min-width:140mm)]:py-1.5 [@media(min-width:140mm)]:border-b [@media(min-width:140mm)]:border-t-0 [@media(min-width:140mm)]:border-gray-600 [@media(min-width:140mm)]:text-[14px] [@media(min-width:140mm)]:font-bold [@media(min-width:140mm)]:text-primary [@media(min-width:140mm)]:uppercase [@media(min-width:140mm)]:tracking-wider mb-1">
+                        Total Amount Received
+                    </div>
+                    {{#each (groupPayments DailyClosings)}}
+                        <div class="flex justify-between py-0.5 border-b border-dashed border-gray-200 [@media(min-width:140mm)]:py-1">
+                            <span>{{PaymentType}}</span>
+                            <span>{{formatNumber TotalRecieved}}</span>
+                        </div>
+                    {{/each}}
+
+                    <!-- Group Footers -->
+                    <div class="border-t border-gray-300 my-1 [@media(min-width:140mm)]:border-gray-600"></div>
+                    <div class="flex justify-between py-0.5">
+                        <span>Total Received</span>
+                        <span>{{formatNumber (sumTotalReceived DailyClosings)}}</span>
+                    </div>
+                    <div class="flex justify-between py-0.5">
+                        <span>Cash Change</span>
+                        <span>{{formatNumber CashChange}}</span>
+                    </div>
+                    <div class="flex justify-between py-0.5">
+                        <span>Vat</span>
+                        <span>{{formatNumber Vat}}</span>
+                    </div>
+                    <div class="flex justify-between py-0.5 font-bold text-primary [@media(min-width:140mm)]:text-lg [@media(min-width:140mm)]:border-t [@media(min-width:140mm)]:border-gray-600 [@media(min-width:140mm)]:mt-1 [@media(min-width:140mm)]:pt-1">
+                        <span>Grand Total</span>
+                        <span>{{formatNumber TotalAmountDollar}}</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="text-center mt-5 pt-1.5 border-t border-gray-200 text-[10px] [@media(min-width:140mm)]:text-[11.5px] text-gray-400">
+              Powered by MB POS
+            </div>
+      </div>
+    </div>
+  </body>
+</html>

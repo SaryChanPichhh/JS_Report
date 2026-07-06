@@ -1,0 +1,101 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+            {{asset "data/reports/assets/report.css"}}
+    </style>
+</head>
+<body>
+<div class="">
+    <div class="header flex justify-between items-center">
+        <img
+                src="{{ShopImage}}"
+                alt="shop logo"
+                class="ml-8 w-28 h-28 object-contain"
+        />
+        <div class="flex flex-col justify-center items-center">
+            <p class="text-2xl">{{ShopName}}</p>
+            <p class="text-xl">Sale Listing By Invoice Report</p>
+            <div class="flex items-center gap-1">
+                <p class="text-sm">{{formatDate StartDate}}</p>
+                <span>~</span>
+                <p class="text-sm">{{formatDate EndDate}}</p>
+            </div>
+            <div class="">
+                <p class="text-sm">Printed Date: {{formatDate PrintDate}}</p>
+            </div>
+        </div>
+        <div class="mr-24"></div>
+    </div>
+
+    {{#each (groupByInvoice Items)}}
+        <!-- INVOICE GROUP HEADER -->
+        <div class="date-header text-sm px-2 py-1 font-semibold text-white bg-primary">
+            Invoice Ref: {{TransRef}}
+        </div>
+
+        <div class="detail mb-3">
+            <table class="w-full border-collapse text-[13px]">
+                <thead>
+                <tr class="border-b ">
+                    <th class=" p-1 text-center" style="width: 5%;">No.</th>
+                    <th class=" p-1 text-center" style="width: 15%;">Date</th>
+                    <th class=" p-1 text-left" style="width: 12%;">Seller</th>
+                    <th class=" p-1 text-left" style="width: 18%;">Customer</th>
+                    <th class=" p-1 text-right" style="width: 14%;">Total</th>
+                    <th class=" p-1 text-right" style="width: 12%;">Cost</th>
+                    <th class=" p-1 text-right" style="width: 12%;">Profit</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each Items}}
+                    <tr class="odd:bg-white even:bg-gray-100 border-b border-gray-400 border-dashed text-[13px]">
+                        <td class="p-1 text-center text-gray-500">{{rowNumber @index}}</td>
+                        <td class="p-1 text-center">{{formatDate TransDate}}</td>
+                        <td class="p-1 text-left text-gray-700">{{Seller}}</td>
+                        <td class="p-1 text-left text-gray-700">{{CustomerName}}</td>
+                        <td class="p-1 text-right font-medium">${{formatNumber Total}}</td>
+                        <td class="p-1 text-right">${{formatNumber Cost}}</td>
+                        <td class="p-1 text-right">${{formatNumber Profit}}</td>
+                    </tr>
+                {{/each}}
+                <!-- Subtotal row for the invoice group -->
+                <tr class="font-bold text-[13px]">
+                    <td class="p-1 text-center" colspan="4">Total</td>
+                    <td class="p-1 text-right">${{SubtotalTotal}}</td>
+                    <td class="p-1 text-right">${{SubtotalCost}}</td>
+                    <td class="p-1 text-right text-primary">${{SubtotalProfit}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    {{/each}}
+
+    <!-- GRAND TOTALS SUMMARY BLOCK -->
+    <div class="grand-totals border-t-2 border-primary px-1">
+        <div class=" flex justify-end
+    ">
+            <div class=" text-[13px]">
+                <div class="flex justify-between py-0.5 gap-5">
+                    <span class="font-semibold text-gray-600">Grand Total:</span>
+                    <span class="font-bold text-gray-800">${{formatNumber (sumField Items "Total")}}</span>
+                </div>
+                <div class="flex justify-between py-0.5 gap-5">
+                    <span class="font-semibold text-gray-600">Grand Total Cost:</span>
+                    <span class="font-bold text-gray-800">${{formatNumber (sumField Items "Cost")}}</span>
+                </div>
+                <div class="flex justify-between py-0.5 gap-5">
+                    <span class="font-semibold text-gray-600">Grand Total Profit:</span>
+                    <span class="font-bold text-gray-800">${{formatNumber (sumField Items "Profit")}}</span>
+                </div>
+                <div class="flex justify-between gap-5 py-0.5 mt-1 rounded font-bold text-primary border-t border-dashed">
+                    <span>Grand Total Amount:</span>
+                    <span>${{formatNumber (sumField Items "Total")}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -18,25 +18,25 @@
           <p class="text-2xl">{{ShopName}}</p>
           <p class="text-xl">Daily Sale Detail Report</p>
           <div class="flex items-center gap-1">
-            <p class="text-sm">Start Date: {{formatDate StartDate}}</p>
+            <p class="text-sm">{{formatDate StartDate}}</p>
             <span>~</span>
-            <p class="text-sm">End Date: {{formatDate EndDate}}</p>
+            <p class="text-sm">{{formatDate EndDate}}</p>
           </div>
           <div class="">
-            <p class="text-sm">Printed On: {{formatDate PrintDate}}</p>
+            <p class="text-sm">Printed:{{formatDate PrintDate}}</p>
           </div>
         </div>
-        <div class="mr-24"></div>
+        <div class="mr-20"></div>
       </div>
       {{#each (groupByDate Data)}}
         <!-- DATE GROUP HEADER -->
-        <div class="date-header text-xs px-2 py-1.5 mt-2 font-semibold">
+        <div class="date-header text-sm px-2 py-1.5 mt-1 font-semibold">
           Date:
           {{formatDate Date}}
         </div>
 
         <div class="detail mb-3">
-          <table class="w-full border-collapse text-xs">
+          <table class="w-full border-collapse text-sm">
             <thead>
               <tr>
                 <th
@@ -74,32 +74,19 @@
                   <td class="border-y p-1 text-center">${{Profit}}</td>
                 </tr>
                 <tr class="">
-                  <td class="text-xs" colspan="6">
-                    <div class="flex flex-col w-full">
-                      <div class="border-b py-1">
-                        <span class="font-semibold px-2">Payment</span>
+                  <td colspan="6">
+                    <div class="flex flex-col">
+                      <div class="border-b">
+                        <span class="px-2 py-1.5 text-sm">Payments</span>
                       </div>
-                      <div class="mt-1 flex flex-col gap-1 w-full">
-                        {{#each Payments}}
-                          <div
-                            class="flex justify-between items-center gap-1 w-full border-b border-dashed py-0.5 px-8"
-                          >
-                            <div class="flex items-center gap-12">
-                              <span class="font-semibold w-4">{{rowNumber
-                                  @index
-                                }}</span>
-                              <span
-                                class="font-semibold text-gray-700"
-                              >{{PaymentType}}</span>
-                            </div>
-                            <span
-                              class="font-semibold text-gray-800"
-                            >{{CurrencySymbol}}{{TotalReceived}}</span>
-                          </div>
-                        {{else}}
-                          <span class="text-gray-400">No payments</span>
-                        {{/each}}
-                      </div>
+                        <table class="w-full">
+                            {{#each Payments}}
+                                <tr class="odd:bg-white even:bg-gray-100 border-b border-b-gray-400 border-dashed">
+                                    <td class=" py-0.5 px-8 text-sm">{{PaymentType}}</td>
+                                    <td class=" py-0.5 px-8 text-right text-sm">${{TotalReceived}}</td>
+                                </tr>
+                            {{/each}}
+                        </table>
                     </div>
                   </td>
                 </tr>
@@ -112,30 +99,23 @@
       {{/each}}
 
       <div class="w-full mt-8 flex flex-col">
-        <div class="py-1 text-center border-y font-semibold w-full">Total
+        <div class="py-1 text-center border-y font-semibold w-full text-sm">Total
           Received</div>
         {{#each Payments}}
           <div
-            class="flex justify-between items-center gap-1 w-full border-b border-dashed py-1 px-8 odd:bg-gray-100 even:bg-white"
+            class="flex justify-between items-center gap-1 w-full border-b border-b-gray-400 border-dashed py-1 px-8 odd:bg-gray-100 even:bg-white"
           >
             <div class="flex items-center gap-12">
-              <span class="font-semibold text-sm w-4">{{rowNumber
-                  @index
-                }}</span>
               <span
                 class="font-semibold text-gray-700 text-sm"
               >{{PaymentType}}</span>
             </div>
             <span
               class="font-semibold text-gray-800 text-sm"
-            >{{CurrencySymbol}}{{TotalReceived}}</span>
+            >${{TotalReceived}}</span>
           </div>
-        {{else}}
-          <span class="text-gray-400 p-2 text-center">No payments</span>
         {{/each}}
       </div>
-
     </div>
-
   </body>
 </html>
